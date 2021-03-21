@@ -1,5 +1,4 @@
 import numpy as np
-import math as math
 import sympy as sp
 
 #Taller Sistemas Lineales
@@ -9,17 +8,14 @@ import sympy as sp
 
 def infectados(v):
     x = sp.symbols('x')
-    f = x * v[0]+ v[1] * x **2+ v[2]* sp.exp(0.15 *x)
+    f = v[0] * x+ v[1] * x **2 + v[2] * sp.exp(0.15 * x)
     rta = 0
     numero = 0
-
-    while (rta <1500 or rta>1600 or numero == 22):
-        
+    while (rta < 1500 or rta > 1600):
         rta = f.evalf(subs={x:numero})
-        numero =numero+1
+        numero = numero + 1
 
-    print ("\n El día en que los infectados es igual a ", int(rta)," es: ",numero-1)
-
+    print ("\nEl día en que los infectados es igual a {} es el numero {}".format(int(rta), numero - 1))
 
 def evalPositivaDefinida(e):
     return np.all(np.linalg.eigvals(e) > 0)
@@ -78,16 +74,15 @@ rep = True
 while(rep):
     a = np.array([[10, 10**2, np.exp(0.15 * 10)], [15, 15**2, np.exp(0.15 * 15)], [20, 20**2, np.exp(0.15 * 20)]], float)
     b = np.array([25, 190, 950], float)
-    v = np.zeros(3,float)
-
+    
     print("\nMatriz propuesta para solución:")
     print(a)
     print("\nVector de terminos independientes:")
     print(b)
     if evalDiagonalDominante(a) or evalPositivaDefinida(a):
         print("\nArreglo solución (Gauss-Seildel):")
-        v = gaussSeidel(a,b,t)
-        print(gaussSeidel(a, b, t))
+        v = gaussSeidel(a, b, t)
+        print(v)
     else:
         print("\nEl metodo de Gauss-Seidel no converge")
 
@@ -95,7 +90,8 @@ while(rep):
         print("\nArreglo solución (SOR):")
         #print("Con valor w = {}".format(print(calculoW(a))))
         w = float(input("\nIngrese el valor del parametro w: "))
-        print(sor(a, b, w, t))
+        v = sor(a, b, w, t)
+        print(v)
     else:
         print("\nEl metodo SOR no converge")
 
