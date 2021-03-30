@@ -1,9 +1,10 @@
+
 # Interpolacion de Lagrange
 import numpy as np
 import sympy as sym
 import matplotlib.pyplot as plt
 
-def lagrange (xi,fi,a):
+def lagrange (xi,fi):
     n = len(xi)
     x = sym.Symbol('x')
     polinomio = 0
@@ -47,8 +48,7 @@ def lagrange (xi,fi,a):
     print(polisimple)
 
     
-    puntos = np.array([6,6.5,7,7.5,8,8.5,9,9.5,10,10.5,11,11.5,12,12.5,13,13.5,14,14.5,15,15.5,16,16.5,17,17.5,18,18.5,19,19.5,20])
-    
+    puntos = np.array([1,2,2.5,3,3.5,4,5])
     
     cantidad = len(puntos)
 
@@ -143,7 +143,7 @@ def diferenciasDivididas(xi,fi,a):
     print(polisimple)
 
 
-    puntos = np.array([6,6.5,7,7.5,8,8.5,9,9.5,10,10.5,11,11.5,12,12.5,13,13.5,14,14.5,15,15.5,16,16.5,17,17.5,18,18.5,19,19.5,20])
+    puntos = np.array([1,2,2,5,3,3.5,4,5])
 
     cantidad = len(puntos)
 
@@ -170,14 +170,15 @@ def diferenciasDivididas(xi,fi,a):
 
     return resultados
 
-print("\n CASO DE TEMPERATURA \n")
-puntos = np.array([6,6.5,7,7.5,8,8.5,9,9.5,10,10.5,11,11.5,12,12.5,13,13.5,14,14.5,15,15.5,16,16.5,17,17.5,18,18.5,19,19.5,20])
+print("\n  CASO DE ESTUDIANTES\n")
+
+puntos = np.array([1,2,2.5,3,3.5,4,5])
 n = len(puntos)
+xi = np.array([1,2,3,4,5])
+fi = np.array([35,83,153,193,215])
+#fi = np.array([35,48,70,40,22])
 
-xi = np.array([6,8,10,12,14,16,18,20])
-fi = np.array([7,9,12,18,21,19,15,10])
-
-cantidad = len (xi)
+cantidad = len(xi)
 
 resultadoslagrange = np.zeros(n)
 resultadosDivididas = np.zeros(n)
@@ -186,8 +187,11 @@ diferencia = np.zeros(n)
 erroresLagrange = np.zeros(cantidad)
 erroresDivididas = np.zeros(cantidad)
 
-resultadoslagrange =lagrange(xi,fi,1)
-resultadosDivididas = diferenciasDivididas(xi,fi,1)
+resultadoslagrange = lagrange(xi,fi)
+resultadosDivididas = lagrange(xi,fi)
+
+sumalagrange = resultadoslagrange[2]
+sumadiferencias = resultadosDivididas[2]
 
 for i in range ( 0 , n):
     diferencia[i] = abs(resultadoslagrange[i]-resultadosDivididas[i])
@@ -195,9 +199,15 @@ for i in range ( 0 , n):
 i = 0
 
 while i< cantidad :
-    erroresLagrange[i] = (fi[i] - resultadoslagrange[4*i])/fi[i] *100
-    erroresDivididas[i] = (fi[i] - resultadosDivididas[4*i])/fi[i] *100
-    i = i+1
+    if i<3 :
+        erroresLagrange[i] = (fi[i] - resultadoslagrange[i])/fi[i] *100
+        erroresDivididas[i] = (fi[i] - resultadosDivididas[i])/fi[i] *100
+        i = i+1
+    else :
+        erroresLagrange[i] = (fi[i] - resultadoslagrange[i+1])/fi[i] *100
+        erroresDivididas[i] = (fi[i] - resultadosDivididas[i+1])/fi[i] *100
+        i = i+1
+
 
 print("\nLa diferencia entre ambos métodos de interpolación es:\n")
 print(diferencia)
@@ -205,3 +215,5 @@ print(diferencia)
 print ( "\n El error relativo dado con el método de Lagrange en los puntos \n", xi ,"\n es :\n", erroresLagrange)
 
 print ( "\n El error relativo dado con el método de Diferencias divididas de Newton en los puntos \n", xi ,"\n es :\n", erroresDivididas)
+
+print ("\n Valor de estudiantes que sacaron 55 o menos \n", sumalagrange , "\n por lagrange\n", "\n y \n", sumadiferencias , "\n por diferencias divididas \n")
