@@ -56,9 +56,5 @@ arreglo = np.zeros(4)
 for i in range(0,len(arreglo)):
     arreglo[i] = evalPoli(polinomio,i)
 
-print(arreglo)
-
 grafica(arreglo)
-
-print (a.c)
 print (funcion)
