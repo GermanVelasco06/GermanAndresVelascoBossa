@@ -17,14 +17,9 @@ def f(a):
 
     return f
 
-def grafica(arr):
-    arr1 = []
-    arr1.append(0)
+def grafica(arr,arr1):
 
-    for i in range (0, len(arr)-1):
-        arr1.append(i+1)
-
-    plt.plot(arr1, arr)
+    plt.plot(arr, arr1,'r--')
     plt.xlabel('x')
     plt.ylabel('y')
     plt.title("Grafica")
@@ -34,7 +29,7 @@ def evalPoli(polinomio, x):
     r = polinomio[0]
     n = len(polinomio)
     for i in range (1, n):
-        r = polinomio[i] + r * x    
+        r = polinomio[i] *x+ r    
 
     return r
 
@@ -51,10 +46,8 @@ polinomio = np.array([a.c[0,0],a.c[1,0],a.c[2,0],a.c[3,0]])
 
 funcion = f(polinomio)
 
-arreglo = np.zeros(4)
+arreglo = np.zeros(50)
+arr1 = np.linspace(0,2,50)
 
-for i in range(0,len(arreglo)):
-    arreglo[i] = evalPoli(polinomio,i)
-
-grafica(arreglo)
+grafica(arr1,a(arr1))
 print (funcion)
