@@ -11,10 +11,10 @@ from scipy import optimize
 #https://github.com/scipy/scipy/blob/5ab7426247900db9de856e790b8bea1bd71aec49/scipy/optimize/zeros.py#L70
 
 def f(x):
-    return x**3 - 2*x**2 + (4/3)*x - (8/27)
+    return [np.exp(x) -np.pi*x] 
 
 def fun(x):
-    return [x[0]**2 + x[0]*x[1] - 10, x[1] + 3*x[0]*x[1]**2 - 57]
+    return [np.pi*x]
 
 def gun(x):
     return [(x[0] + 2)**2 + (x[1] - 2)**2 - 1, x[1] + (x[0] + 2)**2 - 3]
@@ -24,11 +24,11 @@ def hun(x):
 
 def aplicarMetodosNL(f, x, y):
     try:
-        print("Resultado con la funcion fsolve = {}".format(optimize.fsolve(f, [x, y], xtol = 2**(-16))))
+        print("Resultado con la funcion fsolve = {}".format(optimize.fsolve(f, [x, y], xtol = 10**(-6))))
     except Exception as e:
         print("El metodo fsolve no converge")
     try:
-        print("Resultado mediante el metodo de Newton-Krylov = {}".format(optimize.newton_krylov(f, [x, y], x_tol = 2**(-16))))
+        print("Resultado mediante el metodo de Newton-Krylov = {}".format(optimize.newton_krylov(f, [x, y], x_tol = 10**(-6))))
     except Exception as e:
         print("El metodo de Newton-Krylov no converge")
 
@@ -44,7 +44,7 @@ def aplicarMetodosNL(f, x, y):
 
 print("Reto 1")
 print("\nPRIMER PUNTO - ALGORITMO DE BRENT")
-rep1 = True
+rep1 = False
 while rep1:
     print("\nFuncion a evaluar: x^3 - 2x^2 + 4x/3 - 8/27")
     a = float(input("\nIngrese el primer punto: "))
