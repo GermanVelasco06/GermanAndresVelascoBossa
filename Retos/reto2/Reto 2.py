@@ -35,8 +35,8 @@ def eliminacion_porcentaje(data, p):
     return (data, restantes)
 
 #Lectura y transformacion de archivos
-df_pen = pd.read_csv('/Users/safer/Desktop/Quinto Semestre Ingeniería de Sistemas/Análisis Numérico/Referencias/Quixada.csv', encoding='utf-8', sep=';')
-df_sga = pd.read_csv('/Users/safer/Desktop/Quinto Semestre Ingeniería de Sistemas/Análisis Numérico/Referencias/Quixera.csv', encoding='utf-8', sep=';')
+df_pen = pd.read_csv("D:\Universidad\Septimo semestre\Análisis numérico\GermanAndresVelascoBossa\Retos\reto2\Quixada.csv", encoding='utf-8', sep=';')
+df_sga = pd.read_csv("D:\Universidad\Septimo semestre\Análisis numérico\GermanAndresVelascoBossa\Retos\reto2\Quixera.csv", encoding='utf-8', sep=';')
 n, m = df_pen[df_pen.columns[0]].count(), df_sga[df_sga.columns[0]].count()
 #Creacion indices
 indices_1 = np.arange(n)
